@@ -1,0 +1,148 @@
+/* Base colours are Blink Studios' white, black and grey. The only brand colour is ScreenCraft Works purple,
+   taken from its official graphics: #2F2C7E deep, #524F9D main, #7471BD lavender.
+   Audiences are told apart by shade: main purple = participants and the programme,
+   deep purple = mentors, every hero panel is purple. The site is light only. */
+:root{
+  /* Blink neutrals */
+  --paper:#FFFFFF;
+  --canvas:#F2F2F2;
+  --surface:#FFFFFF;
+  --ink:#111111;
+  --ink-2:#3D3D3D;
+  --ink-3:#666666;
+  --line:#E5E5E5;
+  --line-strong:#B3B3B3;
+
+  /* ScreenCraft purple, main: participants and the programme */
+  --vio-50:#EFEFF7; --vio-100:#DDDCEE; --vio-400:#7471BD; --vio-600:#524F9D; --vio-700:#2F2C7E; --vio-900:#1F1D57;
+  /* ScreenCraft purple, deep: mentors */
+  --mag-50:#EAEAF3; --mag-100:#D3D2E7; --mag-400:#524F9D; --mag-600:#2F2C7E; --mag-700:#1F1D57;
+  /* Blink black and grey: partners and sponsors */
+  --amb-50:#F2F2F2; --amb-100:#E5E5E5; --amb-400:#7471BD; --amb-600:#524F9D; --amb-700:#2F2C7E;
+
+  --tone-50:var(--vio-50); --tone-100:var(--vio-100); --tone-400:var(--vio-400); --tone-600:var(--vio-600); --tone-700:var(--vio-700);
+  --hero-bg:#524F9D; --hero-fg:#FFFFFF; --hero-deep:#2F2C7E;   /* split-hero panel, per audience */
+  --signal:var(--tone-600); --signal-ink:#FFFFFF; --signal-soft:color-mix(in oklch,var(--tone-400) 34%,transparent);
+
+  --band:var(--canvas); --band-fg:var(--ink); --band-2:var(--ink-2); --band-line:var(--line);
+  --night:#F2F2F2; --night-fg:#111111; --night-2:#3D3D3D; --night-line:#DCDCDC;
+  --error:#B3261E;
+
+  --f-display:"Schibsted Grotesk",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-text:"Schibsted Grotesk",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"Schibsted Grotesk",ui-sans-serif,system-ui,sans-serif;
+
+  --ease-enter:cubic-bezier(.22,.61,.36,1);
+  --ease-std:cubic-bezier(.22,.61,.36,1);
+  --ease-exit:cubic-bezier(.7,0,.84,0);
+  --ease-settle:cubic-bezier(.34,1.32,.5,1);
+  --t-fast:160ms; --t-std:240ms; --t-slow:480ms;
+
+  --r-ctl:6px; --r-panel:0px;
+  --wrap:1320px;
+  color-scheme:light;
+}
+body[data-tone="mentor"]{--hero-bg:#2F2C7E;--hero-fg:#FFFFFF;--hero-deep:#1F1D57;--tone-50:var(--mag-50);--tone-100:var(--mag-100);--tone-400:var(--mag-400);--tone-600:var(--mag-600);--tone-700:var(--mag-700)}
+body[data-tone="partner"]{--hero-bg:#524F9D;--hero-fg:#FFFFFF;--hero-deep:#2F2C7E;--tone-50:#F2F2F2;--tone-100:#E5E5E5;--tone-400:#7471BD;--tone-600:#524F9D;--tone-700:#2F2C7E}
+
+*,*::before,*::after{box-sizing:border-box}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-text);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--paper)}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+h1,h2,h3,h4{margin:0;text-wrap:balance}
+p{margin:0}
+ul,ol{margin:0;padding:0;list-style:none}
+:focus-visible{outline:2px solid var(--tone-600);outline-offset:3px;border-radius:2px}
+
+.wrap{max-width:var(--wrap);margin-inline:auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+@media (min-width:800px){.wrap{padding-left:max(48px,env(safe-area-inset-left,0px));padding-right:max(48px,env(safe-area-inset-right,0px))}}
+
+/* Eyebrow: bold, uppercase, tracked, in the page's audience colour */
+.slate{font-family:var(--f-text);font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.slate b{font-weight:800;color:var(--tone-600)}
+.mono{font-family:var(--f-text);font-weight:700;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase}
+
+.display{font-family:var(--f-display);font-weight:800;line-height:1.02;letter-spacing:-.035em}
+.h2{font-family:var(--f-display);font-weight:800;line-height:1.06;letter-spacing:-.03em;font-size:clamp(1.85rem,3.4vw + .5rem,3.4rem);max-width:20ch;overflow-wrap:break-word}
+.h3{font-family:var(--f-display);font-weight:800;line-height:1.1;letter-spacing:-.02em;font-size:clamp(1.35rem,1.9vw,1.75rem)}
+.lead{font-size:clamp(1.05rem,1.35vw,1.2rem);color:var(--ink-2);max-width:58ch;line-height:1.55}
+.mark{color:var(--tone-600)}
+
+/* Buttons: 6px radius. Primary is the page's audience colour. Press dips, release springs back. */
+.btn{--h:50px;display:inline-flex;align-items:center;justify-content:center;gap:2px;height:var(--h);padding:0 24px;border-radius:var(--r-ctl);font:700 16px/1 var(--f-text);text-decoration:none;border:1.5px solid transparent;cursor:pointer;white-space:nowrap;transition:transform 320ms var(--ease-settle),background-color var(--t-fast) var(--ease-std),border-color var(--t-fast) var(--ease-std),color var(--t-fast)}
+.btn:active{transform:scale(.97) translateY(1px);transition-duration:90ms;transition-timing-function:var(--ease-exit)}
+.btn-signal{background:var(--tone-600);color:var(--signal-ink)}
+.btn-signal:hover{background:var(--tone-700)}
+.btn-ghost{border-color:var(--ink);color:var(--ink);background:transparent}
+.btn-ghost:hover{background:var(--ink);color:var(--paper)}
+.btn-white{background:#FFFFFF;color:var(--tone-700)}
+.btn-white:hover{background:var(--tone-50)}
+.btn-sm{--h:42px;padding:0 18px;font-size:15px}
+.btn[disabled]{opacity:.45;cursor:not-allowed;transform:none}
+.btn[disabled]:hover{background:transparent;color:var(--ink)}
+
+.arrow{display:inline-block;transition:transform var(--t-std) var(--ease-std)}
+a:hover .arrow,button:hover .arrow{transform:translateX(4px)}
+
+/* Navigation: logo left, links centred, action right. Active and hover use a reserved 3px rule so nothing shifts. */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--paper);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:28px;height:88px}
+.brand{display:grid;gap:3px;text-decoration:none;flex-shrink:0;line-height:1}
+.brand-mark{font-family:var(--f-display);font-weight:800;font-size:30px;letter-spacing:-.04em;line-height:.9;color:var(--ink);text-decoration:none}
+.brand-sub{font-size:12.5px;font-weight:500;letter-spacing:.02em;color:var(--ink);white-space:nowrap}
+.brand-sub br{display:none}
+.menu{display:none;align-items:center;gap:6px;margin-inline:auto}
+.menu>li{position:relative}
+.menu>li>a{display:flex;align-items:center;height:88px;padding:0 12px;font-size:16.5px;font-weight:700;letter-spacing:-.01em;text-decoration:none;color:var(--ink);border-block:3px solid transparent;transition:color var(--t-fast),border-color var(--t-fast)}
+.menu>li>a[data-tone="mentor"]:hover{color:var(--mag-600)}
+.menu>li>a[data-tone="partner"]:hover{color:var(--amb-700)}
+.menu>li>a:hover,.menu>li:focus-within>a{color:var(--vio-600)}
+.menu>li>a[aria-current]{border-bottom-color:var(--tone-600);color:var(--tone-700)}
+.navdrop{position:absolute;top:calc(100% - 4px);left:0;min-width:240px;background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--tone-600);padding:8px 0;box-shadow:0 18px 40px -18px rgba(14,13,26,.25);opacity:0;visibility:hidden;transform:translateY(-4px);transition:opacity var(--t-fast) var(--ease-std),transform var(--t-std) var(--ease-enter),visibility 0s linear var(--t-std)}
+.menu>li:hover .navdrop,.menu>li:focus-within .navdrop{opacity:1;visibility:visible;transform:none;transition-delay:0s}
+.navdrop a{display:block;padding:10px 11px;font-size:15px;font-weight:500;text-decoration:none;color:var(--ink-2)}
+.navdrop a:hover{background:var(--tone-50);color:var(--tone-700)}
+.nav-cta{margin-left:auto}
+.menu-btn{height:44px;padding:0 16px;border:1.5px solid var(--ink);border-radius:var(--r-ctl);background:transparent;color:var(--ink);font:700 15px var(--f-text);cursor:pointer}
+@media (min-width:1120px){.menu{display:flex}.nav-cta{margin-left:0}.menu-btn{display:none}}
+@media (max-width:520px){.brand-sub{display:none}.nav .wrap{height:72px;gap:12px}.nav .btn-sm{padding:0 14px}}
+.sheet{position:fixed;inset:0;z-index:70;background:var(--paper);padding:calc(env(safe-area-inset-top,0px) + 20px) max(20px,env(safe-area-inset-right,0px)) 32px max(20px,env(safe-area-inset-left,0px));overflow-y:auto}
+.sheet-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.sheet h4{font-size:12.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--tone-600);margin:24px 0 6px}
+.sheet a:not(.btn){display:block;padding:7px 0;font-family:var(--f-display);font-weight:800;font-size:24px;letter-spacing:-.025em;text-decoration:none;line-height:1.15}
+
+/* Footer: the one dark surface */
+.footer{background:var(--night);color:var(--night-fg);padding-top:80px;overflow:hidden}
+.footer .brand-mark{color:#111111}
+.foot-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px 28px}
+@media (min-width:640px){.foot-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (min-width:1080px){.foot-grid{grid-template-columns:1.5fr repeat(5,minmax(0,1fr))}}
+.foot-grid h4{font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#524F9D;margin-bottom:16px}
+.foot-grid li{margin:8px 0}
+.foot-grid a{text-decoration:none;color:var(--night-2);font-size:15px}
+.foot-grid a:hover{color:#524F9D;text-decoration:underline;text-underline-offset:3px}
+.foot-about{grid-column:1/-1;max-width:40ch;color:var(--night-2);font-size:15px}
+@media (min-width:1080px){.foot-about{grid-column:auto}}
+.foot-legal{display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between;margin-top:64px;padding-block:24px;border-top:1px solid var(--night-line);font-size:13.5px;color:var(--night-2)}
+.foot-legal a{text-decoration:none;color:var(--night-2)}
+.foot-legal a:hover{color:#524F9D}
+.footer{border-top:4px solid #524F9D}
+.wordmark{font-family:var(--f-display);font-weight:800;font-size:clamp(3.5rem,13vw,12rem);line-height:.8;letter-spacing:-.05em;white-space:nowrap;margin:48px 0 -.1em;color:transparent;-webkit-text-stroke:1.5px #CFCFCF;user-select:none}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:1ms!important;animation-delay:0ms!important;transition-duration:1ms!important;scroll-behavior:auto!important}
+}
+
+/* Blink Studios logo lockup: logo, a hairline divider, then the programme name */
+.brand{display:flex;align-items:center;gap:16px}
+.brand-logo{height:52px;width:auto;display:block}
+.brand-sub{display:block;padding-left:16px;border-left:1px solid var(--line-strong);font-size:13px;font-weight:600;line-height:1.25;letter-spacing:.01em;color:var(--ink)}
+.brand-sub br{display:inline}
+.foot-logo{height:56px;width:auto;display:block}
+.sheet-head .brand-logo{height:44px}
+@media (max-width:520px){.brand-logo{height:40px}}
+@media (max-width:640px){.brand-sub{display:none}}
